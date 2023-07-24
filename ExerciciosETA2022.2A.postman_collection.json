@@ -1,0 +1,1164 @@
+{
+	"info": {
+		"_postman_id": "57fd5ebe-1359-4e97-9c3c-0dcf98e7193f",
+		"name": "ExerciciosETA2022.2A",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27662257"
+	},
+	"item": [
+		{
+			"name": "Exercicio01",
+			"item": [
+				{
+					"name": "Item A",
+					"item": [
+						{
+							"name": "/usuarios",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/usuarios",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"usuarios"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Item B",
+					"item": [
+						{
+							"name": "/usuarios - 201 Created",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cadastro realizado com sucesso\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.message).to.eql(\"Cadastro realizado com sucesso\");\r",
+											"    pm.environment.set(\"UserID\", jsonData._id);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nome\": \"Fulano da Silva\",\r\n  \"email\": \"beltrana@qa.com.br\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": \"true\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/usuarios",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"usuarios"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Item C",
+					"item": [
+						{
+							"name": "/usuarios/id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"nome=Fulano da Silva\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.nome).to.eql(\"Fulano da Silva\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"_id\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData._id).to.eql(pm.environment.get(\"UserID\"));\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/usuarios/{{UserID}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"usuarios",
+										"{{UserID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Item D",
+					"item": [
+						{
+							"name": "usuarios/id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Delete\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.message).to.eql(\"Registro excluído com sucesso\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/usuarios/{{UserID}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"usuarios",
+										"{{UserID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "usuarios/id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cadastro realizado com sucesso\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.message).to.eql(\"Cadastro realizado com sucesso\");\r",
+											"    pm.environment.set(\"UserID\", jsonData._id);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nome\": \"Fulano da Silva\",\r\n  \"email\": \"beltrana1@qa.com.br\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": \"true\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/usuarios",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"usuarios"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Exercicio02",
+			"item": [
+				{
+					"name": "/usuarios - 400 Bad request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Este email já está sendo usado\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(\"Este email já está sendo usado\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Fulano da Silva\",\r\n  \"email\": \"beltrana@qa.com.br\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": \"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/usuarios",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Exercicio03",
+			"item": [
+				{
+					"name": "Item A/B",
+					"item": [
+						{
+							"name": "/usuarios Created",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cadastro realizado com sucesso\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.message).to.eql(\"Cadastro realizado com sucesso\");\r",
+											"    pm.environment.set(\"UserID\", jsonData._id);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nome\": \"Fulano da Silva\",\r\n  \"email\": \"beltrano@qa.com.br\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": \"true\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/usuarios",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"usuarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/usuarios Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Login realizado com sucesso\", function () {\r",
+											"\tvar jsonData = pm.response.json();\r",
+											"\tpm.expect(jsonData.message).to.eql(\"Login realizado com sucesso\");\r",
+											"\tpm.environment.set(\"ex3_userToken\", jsonData.authorization);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"beltrano@qa.com.br\",\r\n  \"password\": \"teste\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/login",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/produtos Created",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cadastro realizado com sucesso\", function () {\r",
+											"\tvar jsonData = pm.response.json();\r",
+											"pm.expect(jsonData.message).to.eql(\"Cadastro realizado com sucesso\");\r",
+											"pm.environment.set(\"ex3_productID\", jsonData._id);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{ex3_userToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nome\": \"Logitech MX\",\r\n  \"preco\": 470,\r\n  \"descricao\": \"Mouse\",\r\n  \"quantidade\": 381\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/produtos",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"produtos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/carrinhos Created",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{ex3_userToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"produtos\": [\r\n    {\r\n      \"idProduto\": \"{{ex3_productID}}\",\r\n      \"quantidade\": 1\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/carrinhos",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"carrinhos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/produtos - Ver estoque",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Quantidade\", function () {\r",
+											"\tvar jsonData = pm.response.json();\r",
+											"pm.expect(jsonData.quantidade).to.eql(380);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/produtos/{{ex3_productID}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"produtos",
+										"{{ex3_productID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/carrinhos - Cancelar compra",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Registro excluído com sucesso\", function () {\r",
+											"\tvar jsonData = pm.response.json();\r",
+											"\tpm.expect(jsonData.message).to.eql(\"Registro excluído com sucesso. Estoque dos produtos reabastecido\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{ex3_userToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/carrinhos/cancelar-compra",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"carrinhos",
+										"cancelar-compra"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/produtos - Ver estoque",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Quantidade\", function () {\r",
+											"\tvar jsonData = pm.response.json();\r",
+											"pm.expect(jsonData.quantidade).to.eql(381);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/produtos/{{ex3_productID}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"produtos",
+										"{{ex3_productID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/produtos - Excluir produto",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Registro excluído com sucesso\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.message).to.eql(\"Registro excluído com sucesso\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{ex3_userToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/produtos/{{ex3_productID}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"produtos",
+										"{{ex3_productID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/usuarios - Excluir usuario",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Delete\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.message).to.eql(\"Registro excluído com sucesso\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/usuarios/{{UserID}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"usuarios",
+										"{{UserID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Exercicio04",
+			"item": [
+				{
+					"name": "Item A/B",
+					"item": [
+						{
+							"name": "/usuario Created",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cadastro realizado com sucesso\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.message).to.eql(\"Cadastro realizado com sucesso\");\r",
+											"    pm.environment.set(\"UserID\", jsonData._id);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nome\": \"Fulano da Silva\",\r\n  \"email\": \"beltrano@qa.com.br\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": \"true\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/usuarios",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"usuarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/usuario Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Login realizado com sucesso\", function () {\r",
+											"\tvar jsonData = pm.response.json();\r",
+											"\tpm.expect(jsonData.message).to.eql(\"Login realizado com sucesso\");\r",
+											"\tpm.environment.set(\"userToken\", jsonData.authorization);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"beltrano@qa.com.br\",\r\n  \"password\": \"teste\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/login",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/produtos - Created",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cadastro realizado com sucesso\", function () {\r",
+											"\tvar jsonData = pm.response.json();\r",
+											"pm.expect(jsonData.message).to.eql(\"Cadastro realizado com sucesso\");\r",
+											"pm.environment.set(\"productID\", jsonData._id);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{userToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nome\": \"Logitech MX\",\r\n  \"preco\": 470,\r\n  \"descricao\": \"Mouse\",\r\n  \"quantidade\": 101\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/produtos",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"produtos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/carrinho - Created",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cadastro realizado com sucesso\", function () {\r",
+											"\tvar jsonData = pm.response.json();\r",
+											"pm.expect(jsonData.message).to.eql(\"Cadastro realizado com sucesso\");\r",
+											"pm.environment.set(\"carrinhoID\", jsonData._id);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{userToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"produtos\": [\r\n    {\r\n      \"idProduto\": \"{{productID}}\",\r\n      \"quantidade\": 2\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/carrinhos",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"carrinhos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/carrinho - Lista",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Valida campos _id do produto/usuário e as quantidades\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.idUsuario).to.eql(UserID);\r",
+											"\r",
+											"    var totalProducts = 0;\r",
+											"    var qtdTotal = 0;\r",
+											"\r",
+											"    // Percorre a lista de produtos e valida o _id e a quantidade de cada produto\r",
+											"    jsonData.produtos.forEach(function (produto) {\r",
+											"        pm.expect(produto.idProduto).to.not.be.empty;\r",
+											"        pm.expect(produto.quantidade).to.be.at.least(1); // Verifica se a quantidade é maior ou igual a 1\r",
+											"\r",
+											"        totalProducts += produto.quantidade * produto.precoUnitario;\r",
+											"        qtdTotal += produto.quantidade;\r",
+											"    });\r",
+											"\r",
+											"    // Verifica se o precoTotal está correto comparando com o valor total dos produtos\r",
+											"    pm.expect(jsonData.precoTotal).to.eql(totalProducts);\r",
+											"\r",
+											"    // Verifica se a quantidadeTotal está correta comparando com a quantidade total calculada\r",
+											"    pm.expect(jsonData.quantidadeTotal).to.eql(qtdTotal);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{userToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/carrinhos/{{carrinhoID}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"carrinhos",
+										"{{carrinhoID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/usuarios - Excluir usuario com carrinho",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Excluir usuário com carrinho associado\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.message).to.eql(\"Não é permitido excluir usuário com carrinho cadastrado\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/usuarios/{{UserID}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"usuarios",
+										"{{UserID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/carrinhos - Concluir compra",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Compra concluída e Registro excluído\", function () {\r",
+											"\tvar jsonData = pm.response.json();\r",
+											"\tpm.expect(jsonData.message).to.eql(\"Registro excluído com sucesso\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{userToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/carrinhos/concluir-compra",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"carrinhos",
+										"concluir-compra"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/carrinhos - Cancelar compra",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Registro excluído com sucesso\", function () {\r",
+											"\tvar jsonData = pm.response.json();\r",
+											"\tpm.expect(jsonData.message).to.eql(\"Registro excluído com sucesso. Estoque dos produtos reabastecido\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{userToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/carrinhos/cancelar-compra",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"carrinhos",
+										"cancelar-compra"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/produtos - Excluir produto",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Excluir produto\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.message).to.eql(\"Registro excluído com sucesso\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{userToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/produtos/{{productID}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"produtos",
+										"{{productID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/usuarios - Excluir usuario",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Delete\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.message).to.eql(\"Registro excluído com sucesso\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/usuarios/{{UserID}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"usuarios",
+										"{{UserID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
